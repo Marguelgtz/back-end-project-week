@@ -5,6 +5,10 @@ server.use(
   express.json()
 )
 
+//Routes
+const notesRoute = require('./data/routes/notesRoute')
+
+server.use('/notes/', notesRoute)
 
 //Listening
 
