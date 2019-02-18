@@ -101,3 +101,5 @@ router.delete('/:id', (req,res) => {
         .json({message: 'Failed to delete note'})
     })
 })
+
+module.exports = router
