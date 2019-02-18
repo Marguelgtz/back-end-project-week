@@ -89,11 +89,12 @@ router.put('/:id', (req,res) => {
 
 // Delete note
 router.delete('/:id', (req,res) => {
+  const {id} = req.params
   db.deleteNote(id)
     .then(count => {
       res
         .status(200)
-        .json({message: `${count} note/s removed`})
+        .json({message: `${count} note removed`})
     })
     .catch(() => {
       res
