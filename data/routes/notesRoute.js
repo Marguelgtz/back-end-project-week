@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     .then(notes => {
       res
         .status(200)
-        .json(200)
+        .json(notes)
     })
     .catch(() => {
       res
