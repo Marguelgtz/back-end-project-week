@@ -30,5 +30,5 @@
 - [Bookshelf.js](http://jasonwatmore.com/post/2017/03/14/react-pagination-example-with-logic-like-google)
   - Bookshelf aims to provide a simple library for common tasks when querying databases in JavaScript, and forming relations between these objects, taking a lot of ideas from the the Data Mapper Pattern.
   - [Example](https://github.com/tanem/express-bookshelf-realworld-example-app/blob/master/lib/tags/model.js)
-
+  - [Example](https://alexzywiak.github.io/using-bookshelf-in-expressjs/index.html)
 
