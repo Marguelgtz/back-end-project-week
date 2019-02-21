@@ -4,8 +4,9 @@ const bcrypt = require('bcrypt')
 
 const db = require('../helpers/authDb')
 const userDb = require('../helpers/usersDb')
+const md = require('../middleware/authMd')
 
-// edpoints
+// endpoints
 router.post('/register', (req, res) =>{
   const creds = req.body
   const hash = bcrypt.hashSync(creds.password, 12)
@@ -16,7 +17,10 @@ router.post('/register', (req, res) =>{
         const id = ids[0]
         userDb.getUser(id)
           .then(user => {
-            // generate jwt through auth middleware
+            const token = md.generateToken(user)
+            res
+              .status(201)
+              .json({token})
           })
           .catch(() => {
             res
