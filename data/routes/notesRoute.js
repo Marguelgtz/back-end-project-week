@@ -45,6 +45,7 @@ router.get('/:id', (req, res) => {
 // Add new note
 router.post('/', (req, res) => {
   const note = req.body
+  console.log(note)
   if(note.title && note.textBody) {
     db.addNote(note)
       .then(newNote => {
@@ -68,6 +69,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req,res) => {
   const {id} = req.params
   const note = req.body
+  console.log(note)
   if(note.title && note.textBody) {
     db.updateNote(id, note)
       .then(updatedNote => {
