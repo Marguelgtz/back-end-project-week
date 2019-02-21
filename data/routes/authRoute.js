@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 
 const db = require('../helpers/authDb')
 const userDb = require('../helpers/usersDb')
-const md = require('../middleware/authMd')
+const {generateToken} = require('../middleware/authMd')
 
 // endpoints
 router.post('/register', (req, res) =>{
@@ -17,7 +17,7 @@ router.post('/register', (req, res) =>{
         const id = ids[0]
         userDb.getUser(id)
           .then(user => {
-            const token = md.generateToken(user)
+            const token = generateToken(user)
             res
               .status(201)
               .json({token})
@@ -32,6 +32,34 @@ router.post('/register', (req, res) =>{
         res
           .status(500)
           .json({message: 'Failed to register user'})
+      })
+  } else {
+    res
+      .status(404)
+      .json({message: 'Missing username/password'})
+  }
+})
+
+router.login('/login', (req, res) => {
+  const creds = req.body
+  if(creds.username && creds.password) {
+    db.login(creds.username)
+      .then(user => {
+        if(user.password && bcrypt.compareSync(creds.password, user.password)) {
+          const token = generateToken(user)
+          res
+            .status(201)
+            .json({token})
+        } else {
+          res
+            .status(403)
+            .json({message: 'Failed to aunthenticate user'})
+        }
+      })
+      .catch(() => {
+        res
+          .status(500)
+          .json({message: 'Login failed'})
       })
   } else {
     res
