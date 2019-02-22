@@ -10,7 +10,7 @@ const {generateToken} = require('../middleware/authMd')
 router.post('/register', (req, res) =>{
   const creds = req.body
   const hash = bcrypt.hashSync(creds.password, 12)
-  creds.password = hash;
+  creds.password = hash
   if(creds.username && creds.password) {
     db.register(creds)
       .then(ids => {
