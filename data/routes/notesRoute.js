@@ -3,6 +3,8 @@ const router = express.Router()
 
 const db = require('../helpers/notesDb')
 
+const {authProtect} = require('../middleware/authMd')
+
 // Endpoints
 
 // Get all notes
@@ -43,7 +45,7 @@ router.get('/:id', (req, res) => {
 })
 
 // Add new note
-router.post('/', (req, res) => {
+router.post('/', authProtect, (req, res) => {
   const note = req.body
   console.log(note)
   if(note.title && note.textBody) {
@@ -66,7 +68,7 @@ router.post('/', (req, res) => {
 })
 
 // Edit note
-router.put('/:id', (req,res) => {
+router.put('/:id', authProtect, (req,res) => {
   const {id} = req.params
   const note = req.body
   console.log(note)
@@ -90,7 +92,7 @@ router.put('/:id', (req,res) => {
 })
 
 // Delete note
-router.delete('/:id', (req,res) => {
+router.delete('/:id', authProtect, (req,res) => {
   const {id} = req.params
   db.deleteNote(id)
     .then(count => {
