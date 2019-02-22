@@ -9,8 +9,10 @@ server.use(
 
 //Routes
 const notesRoute = require('./data/routes/notesRoute')
+const authRoute = require('./data/routes/authRoute')
 
 server.use('/notes/', notesRoute)
+server.use('/auth/', authRoute)
 
 //Listening
 
