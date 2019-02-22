@@ -40,7 +40,7 @@ router.post('/register', (req, res) =>{
   }
 })
 
-router.login('/login', (req, res) => {
+router.post('/login', (req, res) => {
   const creds = req.body
   if(creds.username && creds.password) {
     db.login(creds.username)
