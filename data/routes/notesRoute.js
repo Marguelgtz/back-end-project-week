@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
 })
 
 // Add new note
-router.post('/', authProtect, (req, res) => {
+router.post('/', (req, res) => {
   const note = req.body
   console.log(note)
   if(note.title && note.textBody) {
@@ -68,7 +68,7 @@ router.post('/', authProtect, (req, res) => {
 })
 
 // Edit note
-router.put('/:id', authProtect, (req,res) => {
+router.put('/:id', (req,res) => {
   const {id} = req.params
   const note = req.body
   console.log(note)
@@ -92,7 +92,7 @@ router.put('/:id', authProtect, (req,res) => {
 })
 
 // Delete note
-router.delete('/:id', authProtect, (req,res) => {
+router.delete('/:id', (req,res) => {
   const {id} = req.params
   db.deleteNote(id)
     .then(count => {
